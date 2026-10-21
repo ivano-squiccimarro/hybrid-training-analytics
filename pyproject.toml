@@ -7,6 +7,8 @@ name = "hybrid-training-analytics"
 version = "0.1.0"
 description = "Local, evidence-aware FIT and strength training analytics"
 readme = "README.md"
+license = "MIT AND CC-BY-4.0"
+license-files = ["LICENSE", "LICENSE-DOCUMENTATION.txt", "LICENSING.md"]
 requires-python = ">=3.12,<3.15"
 dependencies = [
   "fitdecode>=0.11,<0.12",

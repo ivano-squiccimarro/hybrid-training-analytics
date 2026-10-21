@@ -18,7 +18,8 @@ This is a usable research prototype, not a finished coaching product.
 
 - Review selected source, screenshots, examples and history for privacy once more.
 - Review scientific wording and limitations; do not turn test counts into accuracy claims.
-- Choose a license and review attribution/third-party terms.
+- Licensing is defined: MIT for software and CC BY 4.0 for documentation;
+  retain the scope in LICENSING.md and review third-party terms for future additions.
 - Verify installation and UI on a second computer/platform.
 - Check accessibility, touch/drag and language needs.
 - Obtain the owner's explicit approval for the visibility change.

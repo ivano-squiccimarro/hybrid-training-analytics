@@ -3,8 +3,8 @@
 Local analytics for treadmill running and strength sessions with incomplete data.
 
 **Work in progress.** The software runs locally; exercise suggestions are experimental
-and have not been validated for real-world recognition accuracy. This project is
-being prepared for a **private repository**, pending a separate publication review.
+and have not been validated for real-world recognition accuracy. It is a
+research prototype; see the verified behavior and limitations below.
 
 ## The problem
 
@@ -101,7 +101,7 @@ uv run --locked python -m hybrid_training_analytics --help
 
 ## What is verified
 
-The private-release validation is recorded in [VERIFICATION.md](docs/VERIFICATION.md).
+The validation is recorded in [VERIFICATION.md](docs/VERIFICATION.md).
 It checks a fresh environment from selected files, the complete synthetic test
 suite, reproducible reports, and wheel contents. After the independent review
 fixes, the suite passes **205 tests** (199 at the original baseline, plus six
@@ -143,9 +143,15 @@ user declarations, not independently measured ground truth.
 Real FIT files, private notes, local catalogs, generated reports, caches and
 virtual environments stay out of Git, including private repositories. Review the
 selected files before every upload; `.gitignore` alone is not a privacy audit.
-No historical development chats, author-machine paths or Git history are included.
+No historical development chats, author-machine paths or unrelated Git history are included.
 The repository must remain private until its owner explicitly approves publication.
-No project license has been selected yet; this is a pending publication decision.
+
+## License
+
+Software, tests and synthetic CSV examples are licensed under [MIT](LICENSE).
+Documentation and the original synthetic illustration are licensed under
+[CC BY 4.0](LICENSE-DOCUMENTATION.txt); embedded code examples remain MIT.
+See [licensing and attribution](LICENSING.md) for the exact scope and exclusions.
 
 ## Development
 

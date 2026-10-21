@@ -1,4 +1,4 @@
-# Private-release verification
+# Verification record
 
 ## Independent review fixes (current state)
 
@@ -62,7 +62,7 @@ hide the failure. Use a short checkout path on Windows.
   or profile settings were changed.
 
 A future public release needs an explicit new approval, another privacy/scientific
-review and a license decision. See ROADMAP.md and LOCAL_TRIAL_PROTOCOL.md.
+review. Licensing is now defined in LICENSING.md. See ROADMAP.md and LOCAL_TRIAL_PROTOCOL.md.
 
 
 ## Follow-up: actual clean Git clone
@@ -100,3 +100,31 @@ local terminal had no GitHub credentials. Local preparation commits are preserve
 the remote has its own initial commit ancestry with the same verified snapshot.
 No repository was made public, no existing repository was modified, and no profile
 or account settings were changed. Publication still requires explicit new approval.
+
+
+## Licensing and publication preparation (2026-10-21)
+
+The owner selected MIT for software and CC BY 4.0 for documentation and the
+original synthetic illustration. LICENSING.md defines the exact scope, keeps
+embedded code examples under MIT and excludes private inputs and third-party
+material. The package expression `MIT AND CC-BY-4.0` describes a distribution
+containing both kinds of material; it is not a choice of license for every file.
+
+Correction commit `118abe8` was verified with lock, lint, formatting and 205
+synthetic tests, then uploaded unchanged with its existing author email.
+GitHub main and private visibility were checked after transfer. The earlier
+connector-only transfer notes above describe the initial upload, not this later
+Git push. No history was rewritten.
+
+The README now describes the prototype directly, without announcing preparation
+for a new repository. Historical verification results above remain unchanged.
+The repository remains private. Publication requires explicit owner approval;
+second-platform installation, fresh visual UX review and real recognition accuracy
+remain unverified.
+
+Checks after the licensing changes: locked environment, Ruff lint/format and all
+205 synthetic tests passed. Wheel build passed; its SPDX expression is
+`MIT AND CC-BY-4.0`, all three licensing files match their source bytes, and all
+six interface assets are present. No FIT/private-input files were found in the
+wheel. No runtime behavior or dependencies changed, so no new recognition,
+platform or visual-validation claim is made.
