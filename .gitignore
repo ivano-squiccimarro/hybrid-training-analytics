@@ -1,0 +1,30 @@
+# Private inputs and local results, even in private repositories
+*.fit
+*.FIT
+*.tcx
+*.gpx
+data/
+reports/
+work/
+*.local.*
+.env
+.env.*
+*.pem
+*.key
+*.ipynb
+LAVORO_IN_CORSO.txt
+# Environments, caches and packaging
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.uv-cache/
+.cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.DS_Store
+Thumbs.db

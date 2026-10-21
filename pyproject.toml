@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hybrid-training-analytics"
+version = "0.1.0"
+description = "Local, evidence-aware FIT and strength training analytics"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+  "fitdecode>=0.11,<0.12",
+  "matplotlib>=3.10,<4",
+  "tzdata>=2025.2",
+]
+
+[project.scripts]
+hta = "hybrid_training_analytics.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8.3,<10", "ruff>=0.13,<1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hybrid_training_analytics"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["work", ".cache"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]

@@ -1,0 +1,6 @@
+timestamp,session_id,exercise,load_mode,body_mass_kg,added_load_kg,external_load_kg,set_index,reps,rir,rpe
+2025-01-06T18:00:00+01:00,synthetic-1,dip,bodyweight,80,10,0,1,6,2,8
+2025-01-06T18:00:00+01:00,synthetic-1,dip,bodyweight,80,10,0,2,6,2,8
+2025-01-13T18:00:00+01:00,synthetic-2,dip,bodyweight,80,12,0,1,6,2,8
+2025-01-13T18:00:00+01:00,synthetic-2,dip,bodyweight,80,12,0,2,6,2,8
+2025-01-13T18:30:00+01:00,synthetic-2,squat,external,80,0,100,1,5,3,7

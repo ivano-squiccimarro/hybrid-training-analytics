@@ -1,0 +1,27 @@
+# Roadmap and current status
+
+This is a usable research prototype, not a finished coaching product.
+
+| Area | Implemented | Still open |
+|---|---|---|
+| Running FIT | CRC validation, UTC/null handling, offline reports | Wider device/export compatibility |
+| Treadmill trace | Separate proportional-distance derivative, optional model GAP | Uniform-error assumption is not a validated per-sample correction |
+| Signals and decoupling | Time support, pauses/gaps, explicit conditions and phase comparison | Independent physiological validation |
+| Strength data | CSV diary, per-exercise volume and matching conditions | Assisted-load mode and broader exercise vocabulary |
+| Partial strength sessions | FIT/manual session, optional annotations, zero known sets | Real-world usability study |
+| Reconciliation | Motion hypotheses where available, device hints, optional split/merge | Real recognition accuracy; accelerometer may be absent |
+| Suggestions | Explainable alternatives, prior context, explicit abstention | Calibrated probabilities and generalization |
+| Evaluation | Frozen trials, separate labels, baselines, null denominators/cohorts | New remembered sessions and independent references |
+| Hybrid context | Time relationships and separate proxies, identity-based deduplication | Causality, recovery and physiological fatigue are not claimed |
+
+## Before making the repository public
+
+- Review selected source, screenshots, examples and history for privacy once more.
+- Review scientific wording and limitations; do not turn test counts into accuracy claims.
+- Choose a license and review attribution/third-party terms.
+- Verify installation and UI on a second computer/platform.
+- Check accessibility, touch/drag and language needs.
+- Obtain the owner's explicit approval for the visibility change.
+
+CI, localization, trained models and expanded interfaces are optional later work.
+None is required by the current synthetic quick start.
