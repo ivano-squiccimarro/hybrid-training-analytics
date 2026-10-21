@@ -37,10 +37,10 @@ hide the failure. Use a short checkout path on Windows.
   usability study remain unverified.
 - Real exercise recognition, lifting-load inference, and sub-30-second annotation
   have not been validated. The software does not predict lifting kg from wrist data.
-- A remote repository has not been created or uploaded by this preparation.
-  Creation requires an available authorized channel. Its private visibility must
-  be checked before any transfer and again afterward. No existing repositories
-  or profile settings have been changed.
+- The owner created a new private repository after local preparation. The selected
+  files were subsequently uploaded through the authorized GitHub connector;
+  private visibility was checked before and after transfer. No other repositories
+  or profile settings were changed.
 
 A future public release needs an explicit new approval, another privacy/scientific
 review and a license decision. See ROADMAP.md and LOCAL_TRIAL_PROTOCOL.md.
@@ -60,4 +60,24 @@ without the development environment or ignored data. Following the README again:
 
 This additionally checks the committed line-ending normalization. The only
 subsequent repository change records these verification results in this document.
-Remote upload and private-visibility checks remain pending; no remote exists yet.
+The remote transfer was completed after this local clone check, as recorded below.
+
+
+## Private repository transfer
+
+The owner created an empty private GitHub repository. Private visibility and
+write access were verified before transferring any selected files. The connector
+initialized the README and then committed the audited complete snapshot on main.
+
+The uploaded 72-file tree matched the locally verified Git tree exactly:
+`1403782e39ea1a073ad800bb0b4ca7667db4fd83`. Thus filenames, modes and every file's
+content matched the selected source, tests, synthetic example and documentation;
+no ignored data, local logs, environments or older project history were included.
+The final documentation-only commit records this transfer and does not change
+runtime code or tests. Private visibility was checked again after the upload.
+
+Remote changes were made exclusively through the GitHub connector, since the
+local terminal had no GitHub credentials. Local preparation commits are preserved;
+the remote has its own initial commit ancestry with the same verified snapshot.
+No repository was made public, no existing repository was modified, and no profile
+or account settings were changed. Publication still requires explicit new approval.
