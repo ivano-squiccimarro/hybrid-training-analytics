@@ -14,15 +14,16 @@ This is a usable research prototype, not a finished coaching product.
 | Evaluation | Frozen trials, separate labels, baselines, null denominators/cohorts | New remembered sessions and independent references |
 | Hybrid context | Time relationships and separate proxies, identity-based deduplication | Causality, recovery and physiological fatigue are not claimed |
 
-## Before making the repository public
+## Future validation and maintenance
 
-- Review selected source, screenshots, examples and history for privacy once more.
+- Review new source, screenshots and examples for privacy before every upload.
 - Review scientific wording and limitations; do not turn test counts into accuracy claims.
 - Licensing is defined: MIT for software and CC BY 4.0 for documentation;
   retain the scope in LICENSING.md and review third-party terms for future additions.
 - Verify installation and UI on a second computer/platform.
 - Check accessibility, touch/drag and language needs.
-- Obtain the owner's explicit approval for the visibility change.
+- Keep the project presented as an experimental portfolio prototype; wider
+  usability and platform checks are future work, not claims of current readiness.
 
 CI, localization, trained models and expanded interfaces are optional later work.
 None is required by the current synthetic quick start.

@@ -1,7 +1,7 @@
 # Contributing
 
-This is an experimental project under private review. Keep the repository private;
-publication needs a new, explicit decision by the owner.
+This is an experimental portfolio project, not a supported end-user product.
+Contribute only code, documentation and entirely synthetic examples.
 
 1. Install with `uv sync --locked --python 3.12`.
 2. Make a small, scoped change. Preserve unrelated local work.
@@ -16,5 +16,5 @@ as confirmed labels. Do not prescribe training progression. No general refactors
 or new dependencies merely to improve presentation.
 
 The local interface currently uses Italian labels. UI translation, CI on other
-platforms, a license choice and independent evaluation are future work, not
+platforms and independent evaluation are future work, not
 prerequisites for trying the synthetic examples.

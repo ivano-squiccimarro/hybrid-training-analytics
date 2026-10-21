@@ -28,4 +28,4 @@ https://creativecommons.org/licenses/by/4.0/legalcode.txt.
 
 These licenses cover distributed project material. They do not license or require
 publication of personal FIT files, local annotations or private reports.
-The repository remains private pending separate, explicit publication approval.
+Public sharing covers only the reviewed project files and synthetic examples.

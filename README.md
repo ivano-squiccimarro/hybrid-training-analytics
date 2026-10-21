@@ -144,7 +144,7 @@ Real FIT files, private notes, local catalogs, generated reports, caches and
 virtual environments stay out of Git, including private repositories. Review the
 selected files before every upload; `.gitignore` alone is not a privacy audit.
 No historical development chats, author-machine paths or unrelated Git history are included.
-The repository must remain private until its owner explicitly approves publication.
+Only source code, documentation and synthetic examples are intended for public sharing.
 
 ## License
 

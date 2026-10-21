@@ -18,8 +18,9 @@ or medical conclusions. Coverage does not establish accuracy; volume is a proxy.
 Only synthetic fixtures/examples belong in Git. Never commit real FIT, personal
 records, private notes, reports, tokens, caches or environments, even privately.
 Do not upload, publish, change visibility, edit accounts or modify Git history
-without explicit authorization for that action. This repository stays PRIVATE
-until its owner explicitly approves publication. Use explicit staging paths.
+without explicit authorization for that action. The owner has approved public
+sharing of the reviewed code, documentation and synthetic examples only.
+Personal inputs and reports must remain local. Use explicit staging paths.
 
 Domain logic belongs under src/hybrid_training_analytics; keep I/O separate.
 No new dependencies, framework changes or unrelated refactoring without a task

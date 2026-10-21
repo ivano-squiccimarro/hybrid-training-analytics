@@ -61,8 +61,8 @@ hide the failure. Use a short checkout path on Windows.
   private visibility was checked before and after transfer. No other repositories
   or profile settings were changed.
 
-A future public release needs an explicit new approval, another privacy/scientific
-review. Licensing is now defined in LICENSING.md. See ROADMAP.md and LOCAL_TRIAL_PROTOCOL.md.
+At that stage, public release still required owner approval and a final review.
+Licensing is now defined in LICENSING.md. See the later publication review below.
 
 
 ## Follow-up: actual clean Git clone
@@ -99,7 +99,7 @@ Remote changes were made exclusively through the GitHub connector, since the
 local terminal had no GitHub credentials. Local preparation commits are preserved;
 the remote has its own initial commit ancestry with the same verified snapshot.
 No repository was made public, no existing repository was modified, and no profile
-or account settings were changed. Publication still requires explicit new approval.
+or account settings were changed during that initial transfer.
 
 
 ## Licensing and publication preparation (2026-10-21)
@@ -118,8 +118,8 @@ Git push. No history was rewritten.
 
 The README now describes the prototype directly, without announcing preparation
 for a new repository. Historical verification results above remain unchanged.
-The repository remains private. Publication requires explicit owner approval;
-second-platform installation, fresh visual UX review and real recognition accuracy
+At the licensing stage the repository remained private pending owner approval.
+Second-platform installation, fresh visual UX review and real recognition accuracy
 remain unverified.
 
 Checks after the licensing changes: locked environment, Ruff lint/format and all
@@ -128,3 +128,21 @@ Checks after the licensing changes: locked environment, Ruff lint/format and all
 six interface assets are present. No FIT/private-input files were found in the
 wheel. No runtime behavior or dependencies changed, so no new recognition,
 platform or visual-validation claim is made.
+
+
+## Public prototype review (2026-10-21)
+
+An independent final review of commit `f317269` found no blocking issue for
+public presentation as an experimental portfolio prototype. It checked the five
+reachable commits and 75 tracked files, licensing, provenance and relative links;
+lock, lint, format, 205 synthetic tests and wheel build passed. This is the
+reviewer's reported result, separate from the checks recorded above.
+
+The owner then explicitly approved the documentation updates, commit/push and
+public visibility change. The current documentation removes the former private
+review requirement while retaining all restrictions on personal data. No runtime
+behavior or dependencies changed. Public presentation does not establish exercise
+recognition accuracy, readiness for other users or cross-platform compatibility.
+
+After these documentation-only updates, `scripts/check.py` passed lock, lint,
+formatting and all 205 synthetic tests on Windows.
