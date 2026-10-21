@@ -65,6 +65,24 @@ def test_order_duplicates_missing_values_and_distance_resets():
     assert len(run.warnings) >= 4
 
 
+@pytest.mark.parametrize(
+    ("events", "expected"),
+    [
+        ([(600, "stop_all"), (660, "start")], [(600, 660)]),
+        ([(600, "stop_all"), (600, "start")], []),
+        ([(600, "stop"), (600, "start"), (900, "stop_all"), (960, "start")], [(900, 960)]),
+        ([(0, "start"), (1500, "stop_all")], [(1500, 1800)]),
+    ],
+    ids=["pause", "same-second", "same-second-then-pause", "open-stop-until-end"],
+)
+def test_timer_events_become_bounded_pauses(events, expected):
+    start = datetime(2025, 1, 1, tzinfo=UTC)
+    records = [{"timestamp": start + timedelta(seconds=s), "heart_rate": 140} for s in range(1801)]
+    stamped = [(utc_timestamp(start + timedelta(seconds=s), fit_utc=True), k) for s, k in events]
+    run = normalize_records(records, digest="a" * 64, events=stamped)
+    assert run.pauses_s == expected
+
+
 def test_normalized_json_rejects_naive_timestamp(run):
     payload = run.to_dict()
     payload["samples"][0]["timestamp_utc"] = "2025-01-15T17:00:00"

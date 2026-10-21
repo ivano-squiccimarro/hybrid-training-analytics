@@ -1,5 +1,24 @@
 # Private-release verification
 
+## Independent review fixes (current state)
+
+An independent review of the private repository (commit `c1edcfb`) repeated the
+checks below from a fresh clone and found no blocking issue. Four small fixes
+followed; afterwards `scripts/check.py` passes lock, Ruff lint, format and
+**205 synthetic tests** on Windows, CPython 3.12.7.
+
+| Fix | Change | Regression test |
+|---|---|---|
+| Text encoding | Ten double-encoded Italian strings (reports, CLI help, errors) restored to UTF-8 | Generated reports checked for mojibake |
+| Timer pauses | Same-second stop/start events keep FIT order instead of opening a pause until the end | `test_timer_events_become_bounded_pauses` |
+| Import scratch files | Temporary copies under `work/` are removed after each FIT/CSV import, including failures | `test_imports_leave_no_scratch_copies` |
+| Local server | Non-ASCII token header gives 403 and deeply nested JSON gives 400, instead of a dropped connection | `test_http_malformed_token_and_nested_json_are_rejected` |
+
+The running demo still reproduces byte-identically, and the README SVG is unchanged.
+The sections below record the earlier private-release verification (199 tests).
+
+## Earlier private-release verification
+
 Verified on 2026-10-21, Windows, CPython 3.12.7, using a new environment in a
 new short-path directory. No original virtual environment, data, personal
 configuration or Git history was copied. Source logic is unchanged.

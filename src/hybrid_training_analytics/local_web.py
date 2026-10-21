@@ -78,7 +78,10 @@ class LocalHandler(BaseHTTPRequestHandler):
             return False
         if self.headers.get("Sec-Fetch-Site") == "cross-site":
             return False
-        return hmac.compare_digest(self.headers.get("X-HTA-Token", ""), self.server.token)
+        # Compare bytes: str comparison raises TypeError on non-ASCII header values.
+        return hmac.compare_digest(
+            self.headers.get("X-HTA-Token", "").encode(), self.server.token.encode()
+        )
 
     def do_GET(self) -> None:
         with self.server.catalog_lock:
@@ -267,7 +270,14 @@ class LocalHandler(BaseHTTPRequestHandler):
                 self.send_content(200, file.read_bytes(), "application/octet-stream")
             else:
                 self.respond(404, {"error": "Rotta non disponibile"})
-        except (DataError, OSError, ValueError, TypeError, KeyError) as exc:
+        except (
+            DataError,
+            OSError,
+            ValueError,
+            TypeError,
+            KeyError,
+            RecursionError,  # deeply nested JSON
+        ) as exc:
             # Domain messages contain no raw file bytes or request body.
             message = (
                 str(exc) if isinstance(exc, DataError) else "Richiesta non valida o file mancante"

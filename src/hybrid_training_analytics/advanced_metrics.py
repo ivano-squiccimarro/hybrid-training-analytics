@@ -124,7 +124,7 @@ class DecouplingConfig:
             if not isinstance(value, (int, float)) or number(value) is None:
                 raise DataError("Configurazione decoupling: numero non finito o negativo")
         if not 0 <= self.start_s < end <= run.samples[-1].elapsed_s:
-            raise DataError("Finestra decoupling fuori attivitÃƒÂ ")
+            raise DataError("Finestra decoupling fuori attività")
         if self.max_gap_s <= 0 or self.min_duration_s <= 0 or not 0 < self.min_coverage <= 1:
             raise DataError("Durata/gap/copertura non validi")
         if self.output not in {"speed_m_s", "power_w"}:

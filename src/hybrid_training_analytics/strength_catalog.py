@@ -6,6 +6,7 @@ import csv
 import hashlib
 import io
 import json
+import shutil
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from uuid import uuid4
@@ -45,8 +46,12 @@ class StrengthCatalog:
         scratch = self.workspace / "work" / ("strength-import-" + uuid4().hex)
         scratch.mkdir(parents=True)
         path = scratch / "input.fit"
-        path.write_bytes(content)
-        raw = read_strength_fit(path, synthetic=synthetic)
+        try:
+            path.write_bytes(content)
+            raw = read_strength_fit(path, synthetic=synthetic)
+        finally:
+            # The durable private copy is source.fit; never leave a scratch duplicate.
+            shutil.rmtree(scratch, ignore_errors=True)
         hypothesis = detect_slots(raw)
         directory.mkdir(parents=True, exist_ok=False)
         marker = directory / "INCOMPLETE.txt"
@@ -322,7 +327,7 @@ class StrengthCatalog:
                 )
             exercise = row.get("exercise_snapshot")
             if exercise is None:
-                raise DataError("Esercizio confermato non piÃ¹ nel catalogo: ripristina contesto")
+                raise DataError("Esercizio confermato non più nel catalogo: ripristina contesto")
             indices[row["exercise_id"]] = indices.get(row["exercise_id"], 0) + 1
             stamp = (
                 datetime.fromisoformat(draft["start_utc"]) + timedelta(seconds=row["start_s"])

@@ -46,7 +46,7 @@ def add_commands(commands) -> None:
     strength_demo = commands.add_parser("strength-reconcile-demo", help="Demo forza sintetica")
     strength_demo.add_argument("--out", type=Path, required=True)
     enriched = commands.add_parser(
-        "enrich", help="Minuti, annotazioni, decoupling e sensibilitÃ  offline"
+        "enrich", help="Minuti, annotazioni, decoupling e sensibilità offline"
     )
     enriched.add_argument("run_json", type=Path)
     enriched.add_argument("--annotations", type=Path)

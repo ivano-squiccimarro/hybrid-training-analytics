@@ -359,7 +359,7 @@ def validate_context(context: dict) -> dict:
             raise DataError("ID esercizio duplicato")
         seen.add(row["id"])
         if row["load_mode"] not in {"external", "bodyweight"}:
-            raise DataError("ModalitÃ  carico non valida")
+            raise DataError("Modalità carico non valida")
         if (
             not isinstance(row["muscles"], list)
             or not row["muscles"]

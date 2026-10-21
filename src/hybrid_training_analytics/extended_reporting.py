@@ -92,8 +92,8 @@ def _chart(minutes: list[dict]) -> str:
     elements = [
         '<svg viewBox="0 0 900 220" role="img" aria-label="FC media temporale per minuto, bpm">',
         '<rect width="900" height="220" fill="#f3f7fa"/>',
-        f'<text x="8" y="20">FC media per minuto Ã‚Â· bpm ({lo:.0f}Ã¢â‚¬â€œ{hi:.0f})</text>',
-        '<text x="660" y="210">Tempo trascorso Ã‚Â· min</text>',
+        f'<text x="8" y="20">FC media per minuto · bpm ({lo:.0f}–{hi:.0f})</text>',
+        '<text x="660" y="210">Tempo trascorso · min</text>',
     ]
     for row in minutes:
         value = row["heart_rate_bpm"]
@@ -183,7 +183,7 @@ def write_descriptor_report(payload: dict, path: Path, *, chart: str = "") -> No
         with path.open("x", encoding="utf-8") as out:
             out.write(hybrid_document(payload))
         return
-    synthetic = " Ã‚Â· INTERAMENTE SINTETICO" if payload.get("synthetic") else ""
+    synthetic = " · INTERAMENTE SINTETICO" if payload.get("synthetic") else ""
     coupling = payload.get("decoupling", {})
     value = coupling.get("decoupling_pct")
     label = "Non disponibile" if value is None else f"{value:.2f} %"
@@ -199,7 +199,7 @@ def write_descriptor_report(payload: dict, path: Path, *, chart: str = "") -> No
     <p class="note">Dati registrati, stime, dichiarazioni e inferenze sono distinti.
     Null significa sconosciuto. Nessuna prescrizione o causa fisiologica attribuita.</p>
     <h2>Decoupling: {label}</h2><p>{html.escape(reasons)}</p>{chart}
-    <h2>Parametri, unitÃƒÂ , supporti e risultati</h2>
+    <h2>Parametri, unità, supporti e risultati</h2>
     <pre>{html.escape(json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False))}
     </pre></html>"""
     with path.open("x", encoding="utf-8") as out:

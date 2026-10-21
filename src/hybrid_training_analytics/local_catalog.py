@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 from dataclasses import asdict
 from pathlib import Path
 from uuid import uuid4
@@ -47,9 +48,13 @@ class LocalCatalog:
         scratch = self.workspace / "work" / ("full-import-" + uuid4().hex)
         scratch.mkdir(parents=True)
         path = scratch / "input.fit"
-        path.write_bytes(content)
-        run = read_fit(path, synthetic=synthetic)
-        signals = read_signals(path, run)
+        try:
+            path.write_bytes(content)
+            run = read_fit(path, synthetic=synthetic)
+            signals = read_signals(path, run)
+        finally:
+            # The durable private copy is source.fit; never leave a scratch duplicate.
+            shutil.rmtree(scratch, ignore_errors=True)
         directory.mkdir(parents=True, exist_ok=False)
         marker = directory / "INCOMPLETE.txt"
         marker.write_text("Importazione locale in corso", encoding="utf-8")
@@ -69,7 +74,7 @@ class LocalCatalog:
             raise DataError("Importazione precedente incompleta: conservata per diagnosi")
         run = RunData.from_dict(json.loads((directory / "run.json").read_text(encoding="utf-8")))
         if run.source_sha256 != key:
-            raise DataError("IdentitÃƒÂ  del catalogo incompatibile")
+            raise DataError("Identità del catalogo incompatibile")
         signals = json.loads((directory / "signals.json").read_text(encoding="utf-8"))
         return run, signals
 
@@ -179,11 +184,14 @@ class LocalCatalog:
         scratch = self.workspace / "work" / ("full-strength-" + uuid4().hex)
         scratch.mkdir(parents=True)
         path = scratch / "sets.csv"
-        path.write_bytes(content)
-        rows = read_strength(path)
+        try:
+            path.write_bytes(content)
+            rows = read_strength(path)
+        finally:
+            shutil.rmtree(scratch, ignore_errors=True)
         existing = {r.session_id for r in self.strength_sets()}
         if any(r.session_id in existing for r in rows):
-            raise DataError("Sessione forza giÃƒÂ  importata: nessuna sovrascrittura")
+            raise DataError("Sessione forza già importata: nessuna sovrascrittura")
         folder.mkdir(parents=True, exist_ok=False)
         (folder / "sets.csv").write_bytes(content)
         return summarize_strength(rows)

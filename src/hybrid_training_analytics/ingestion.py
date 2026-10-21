@@ -73,7 +73,8 @@ def normalize_records(
     end_s = samples[-1].elapsed_s
     pauses = []
     stopped_at = None
-    for stamp, kind in sorted(events or []):
+    # Stable sort by time only: same-second stop/start keep their FIT order.
+    for stamp, kind in sorted(events or [], key=lambda event: event[0]):
         elapsed = max(0.0, (datetime.fromisoformat(stamp) - origin).total_seconds())
         if kind in {"stop", "stop_all", "stop_disable", "stop_disable_all"}:
             if stopped_at is None:

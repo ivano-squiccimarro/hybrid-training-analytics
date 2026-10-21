@@ -1,6 +1,7 @@
 import hashlib
 import http.client
 import json
+from pathlib import Path
 from threading import Thread
 
 import pytest
@@ -11,6 +12,8 @@ from hybrid_training_analytics.extended_reporting import enrich, write_extended
 from hybrid_training_analytics.local_catalog import LocalCatalog
 from hybrid_training_analytics.local_web import LocalServer
 from hybrid_training_analytics.models import DataError
+from hybrid_training_analytics.strength_catalog import StrengthCatalog
+from hybrid_training_analytics.strength_synthetic import strength_fit_bytes
 
 
 def test_extended_reproduction_and_preserve(run, tmp_path):
@@ -64,6 +67,51 @@ def test_corrupt_fit_does_not_enter_catalog(synthetic_fit, tmp_path):
     with pytest.raises(DataError):
         catalog.import_fit(bytes(content))
     assert catalog.runs() == []
+
+
+def test_imports_leave_no_scratch_copies(synthetic_fit, tmp_path):
+    workspace = tmp_path / "workspace"
+    catalog, strength = LocalCatalog(workspace), StrengthCatalog(workspace)
+    valid_run, valid_strength = synthetic_fit.read_bytes(), strength_fit_bytes()
+    catalog.import_fit(valid_run, synthetic=True)
+    strength.import_fit(valid_strength, synthetic=True)
+    diary = Path(__file__).parents[1] / "examples" / "strength_synthetic.csv"
+    catalog.import_strength(diary.read_bytes())
+    for importer, content in (
+        (catalog.import_fit, valid_run),
+        (strength.import_fit, valid_strength),
+    ):
+        corrupt = bytearray(content)
+        corrupt[-1] ^= 1
+        with pytest.raises(DataError):
+            importer(bytes(corrupt))
+    with pytest.raises(DataError):
+        catalog.import_strength(b"not,a,diary\n")
+    assert [p for p in (workspace / "work").rglob("*") if p.is_file()] == []
+    assert len(catalog.runs()) == 1 and len(strength.sessions()) == 1
+
+
+def test_http_malformed_token_and_nested_json_are_rejected(tmp_path):
+    server = LocalServer(tmp_path, 0)
+    Thread(target=server.serve_forever, daemon=True).start()
+
+    def request(method, path, body=None, headers=None):
+        connection = http.client.HTTPConnection("127.0.0.1", server.server_port, timeout=5)
+        connection.request(method, path, body=body, headers=headers or {})
+        response = connection.getresponse()
+        status = response.status
+        response.read()
+        connection.close()
+        return status
+
+    try:
+        assert request("GET", "/api/runs", headers={"X-HTA-Token": "è"}) == 403
+        headers = {"X-HTA-Token": server.token, "Content-Type": "application/json"}
+        assert request("POST", "/api/annotate", b"[" * 100_000, headers) == 400
+        assert request("GET", "/api/runs", headers={"X-HTA-Token": server.token}) == 200
+    finally:
+        server.shutdown()
+        server.server_close()
 
 
 def test_http_local_auth_origin_and_whitelist(synthetic_fit, tmp_path):

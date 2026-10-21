@@ -103,8 +103,9 @@ uv run --locked python -m hybrid_training_analytics --help
 
 The private-release validation is recorded in [VERIFICATION.md](docs/VERIFICATION.md).
 It checks a fresh environment from selected files, the complete synthetic test
-suite, reproducible reports, and wheel contents. The fresh-copy suite passed **199 tests**, matching the original development
-baseline.
+suite, reproducible reports, and wheel contents. After the independent review
+fixes, the suite passes **205 tests** (199 at the original baseline, plus six
+regression tests for timer pauses, import scratch files and malformed requests).
 These are correctness and robustness checks, not recognition-accuracy benchmarks.
 
 All committed CSV examples are invented. The SVG above is generated from the
